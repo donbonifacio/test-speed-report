@@ -12,13 +12,13 @@
   the results will be placed here"
   (atom {:tests [] :current nil}))
 
-(defn- calc-average
+(defn calc-average
   [total-tests total-time-spent]
   (if (zero? total-tests)
     "-"
     (int (/ total-time-spent total-tests))))
 
-(defn- calc-median [elapseds total-tests]
+(defn calc-median [elapseds total-tests]
   (if (zero? total-tests)
     "-"
     (let [middle (int (/ total-tests 2))]
@@ -64,7 +64,7 @@
 ;; Loads and runs tests
 ;;
 
-(defn- namespaces-in-directories [dirs]
+(defn namespaces-in-directories [dirs]
   (let [as-files (map clojure.java.io/file dirs)]
     (flatten (for [file as-files]
                (clojure.tools.namespace.find/find-namespaces-in-dir file)))))
