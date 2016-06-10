@@ -39,7 +39,7 @@
         started-at (:started-at test-data)
         elapsed (/ (double (- (. System (nanoTime)) started-at)) 1000000.0)
         test-data {:elapsed elapsed :test test-sym}]
-    (swap! data update :tests conj test-data)))
+    (swap! data update-in [:tests] conj test-data)))
 
 (defmethod clojure.test/report :summary [m]
   (let [tests (sort-by :elapsed (get @data :tests))
@@ -71,6 +71,6 @@
 
 (defn load-and-run-tests [test-paths]
   (let [namespaces (namespaces-in-directories test-paths)]
-    (run! require namespaces)
+    (doall (map require namespaces))
     (apply clojure.test/run-tests namespaces)
     (shutdown-agents)))
