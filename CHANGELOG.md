@@ -1,2 +1,2 @@
 ## 0.1.0
-  - Initial release
+  - Initial release, displays speed report for clj tests
